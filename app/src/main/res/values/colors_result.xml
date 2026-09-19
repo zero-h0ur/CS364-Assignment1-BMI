@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bmi_underweight">#1565C0</color>
+    <color name="bmi_normal">#2E7D32</color>
+    <color name="bmi_overweight">#8D4E00</color>
+    <color name="bmi_obese">#B71C1C</color>
+
+    <color name="bmi_result_value">#1F1F1F</color>
+    <color name="bmi_result_neutral">#5F6368</color>
+    <color name="bmi_result_error">#B71C1C</color>
+    <color name="bmi_result_background">#FFFFFF</color>
+</resources>

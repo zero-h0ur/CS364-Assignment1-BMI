@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/panel_result"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:minHeight="160dp"
+    android:elevation="2dp"
+    android:background="@color/bmi_result_background"
+    android:accessibilityLiveRegion="polite">
+
+    <TextView
+        android:id="@+id/text_result_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@color/bmi_result_neutral"
+        tools:text="Enter weight and height, then tap Calculate." />
+
+    <TextView
+        android:id="@+id/text_bmi_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/bmi_result_value"
+        android:visibility="gone"
+        tools:text="23.03 kg/m²"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/text_bmi_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="Normal"
+        tools:textColor="@color/bmi_normal"
+        tools:visibility="visible" />
+
+</LinearLayout>
