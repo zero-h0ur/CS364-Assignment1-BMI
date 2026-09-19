@@ -60,7 +60,7 @@ Category: Normal
 | B | `รณกฤต วรลักษณ์ภักดี` | `6709650607` | BMI Core and Unit Tests |
 | C | `ภูริณัฐ วรรธนะธัญญา` | `6709650565` | Input Form and Validation |
 | D | `ภูรินทร์ แก้วพ่วงเสก` | `6709650573` | Responsive Layout and State Restoration |
-| E | `ชนกานต์ คงรัชตภิญโญ` | `670960235` | Thai/English Localization and Result Formatting |
+| E | `ชนกานต์ คงรัชตภิญโญ` | `6709650235` | Thai/English Localization and Result Formatting |
 
 สมาชิกทุกคนพัฒนาและ Commit โค้ดในส่วนที่ตนรับผิดชอบ
 
