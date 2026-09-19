@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BMI Calculator</string>
+    <string name="app_title">Body Mass Index</string>
+    <string name="adult_scope">Adult classification for ages 20 and over</string>
+
+    <string name="label_weight">Weight (kg)</string>
+    <string name="label_height">Height (cm)</string>
+    <string name="action_calculate">Calculate</string>
+
+    <string name="result_title">Result</string>
+    <string name="label_bmi">BMI</string>
+    <string name="label_category">Weight category</string>
+    <string name="result_empty">Enter weight and height, then tap Calculate.</string>
+
+    <string name="error_required">Please enter a value.</string>
+    <string name="error_invalid_number">Enter a number using a decimal point.</string>
+    <string name="error_non_positive">Enter a value greater than zero.</string>
+    <string name="error_calculation">Unable to calculate. Check the values entered.</string>
+
+    <string name="bmi_value_format">%1$s kg/m²</string>
+
+    <string name="category_severe_thinness">Severe thinness</string>
+    <string name="category_moderate_thinness">Moderate thinness</string>
+    <string name="category_mild_thinness">Mild thinness</string>
+    <string name="category_normal">Normal</string>
+    <string name="category_overweight">Overweight</string>
+    <string name="category_obese_i">Obese class I</string>
+    <string name="category_obese_ii">Obese class II</string>
+    <string name="category_obese_iii">Obese class III</string>
+</resources>
