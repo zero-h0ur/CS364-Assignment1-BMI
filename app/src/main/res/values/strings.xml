@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">BMIapplication</string>
+    <string name="app_name">BMI Calculator</string>
+
+    <!-- Mocks for Member E's string requirements -->
+    <string name="app_title">Body Mass Index</string>
+    <string name="label_weight">Weight (kg)</string>
+    <string name="label_height">Height (cm)</string>
+    <string name="action_calculate">Calculate</string>
+    <string name="result_title">Result</string>
+    <string name="label_bmi">BMI</string>
+    <string name="label_category">Weight category</string>
+    <string name="result_empty">Enter weight and height, then tap Calculate.</string>
 </resources>

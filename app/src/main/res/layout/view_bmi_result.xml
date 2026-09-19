@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/panel_result"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:elevation="2dp"
+    android:padding="@dimen/screen_padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/result_title"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/section_gap" />
 
     <TextView
         android:id="@+id/text_result_message"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/result_empty"
+        android:textSize="@dimen/text_body"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/field_gap" />
 
     <TextView
         android:id="@+id/text_bmi_value"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:text="23.03 kg/m²"
+        android:textSize="@dimen/text_bmi_value_size"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/field_gap" />
 
     <TextView
         android:id="@+id/text_bmi_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:text="Normal"
+        tools:textColor="#2E7D32"
+        android:textSize="@dimen/text_title"
+        android:gravity="center" />
 
 </LinearLayout>

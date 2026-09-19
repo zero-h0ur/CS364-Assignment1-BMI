@@ -3,23 +3,46 @@
     android:id="@+id/panel_form"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground"
+    android:elevation="2dp"
+    android:padding="@dimen/screen_padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/section_gap" />
 
     <EditText
         android:id="@+id/input_weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/label_weight"
+        android:inputType="numberDecimal|numberSigned"
+        android:textSize="@dimen/text_body"
+        android:layout_marginBottom="@dimen/field_gap"
+        android:importantForAutofill="no"
         android:saveEnabled="false" />
 
     <EditText
         android:id="@+id/input_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/label_height"
+        android:inputType="numberDecimal|numberSigned"
+        android:textSize="@dimen/text_body"
+        android:layout_marginBottom="@dimen/section_gap"
+        android:importantForAutofill="no"
         android:saveEnabled="false" />
 
     <Button
         android:id="@+id/button_calculate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/action_calculate"
+        android:textSize="@dimen/text_body" />
 
 </LinearLayout>
