@@ -24,6 +24,7 @@
         android:inputType="numberDecimal|numberSigned"
         android:textSize="@dimen/text_body"
         android:layout_marginBottom="@dimen/field_gap"
+        android:imeOptions="flagNoExtractUi"
         android:importantForAutofill="no"
         android:saveEnabled="false" />
 
@@ -35,6 +36,7 @@
         android:inputType="numberDecimal|numberSigned"
         android:textSize="@dimen/text_body"
         android:layout_marginBottom="@dimen/section_gap"
+        android:imeOptions="flagNoExtractUi"
         android:importantForAutofill="no"
         android:saveEnabled="false" />
 
