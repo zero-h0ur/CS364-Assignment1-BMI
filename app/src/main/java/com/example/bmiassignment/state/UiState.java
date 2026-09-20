@@ -1,7 +1,7 @@
-package com.example.bmiapplication.state;
+package com.example.bmiassignment.state;
 
-import com.example.bmiapplication.domain.BmiInput;
-import com.example.bmiapplication.model.FormSnapshot;
+import com.example.bmiassignment.domain.BmiInput;
+import com.example.bmiassignment.model.FormSnapshot;
 
 public final class UiState {
     public final FormSnapshot form;

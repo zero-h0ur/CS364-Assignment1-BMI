@@ -1,4 +1,4 @@
-package com.example.bmiapplication;
+package com.example.bmiassignment;
 
 import org.junit.Test;
 
