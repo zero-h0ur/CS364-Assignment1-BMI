@@ -63,6 +63,10 @@ public final class UiStateStore {
 
         boolean calculationFailed = savedState.getBoolean(KEY_CALCULATION_FAILED, false);
 
+        if (calculationFailed) {
+            lastInput = null;
+        }
+
         return new UiState(form, lastInput, calculationFailed);
     }
 

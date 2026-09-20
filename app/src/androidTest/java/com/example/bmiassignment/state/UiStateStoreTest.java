@@ -93,5 +93,29 @@ public class UiStateStoreTest {
 
         assertNull(restoredState.lastCalculatedInput);
         assertTrue(restoredState.calculationFailed);
+    @Test
+    public void testRestore_withNanOrInfinity_discardsLastInput() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("bmi_state.has_last_input", true);
+        bundle.putDouble("bmi_state.last_weight_kg", Double.NaN);
+        bundle.putDouble("bmi_state.last_height_cm", Double.POSITIVE_INFINITY);
+
+        UiState restoredState = UiStateStore.restore(bundle);
+
+        assertNull(restoredState.lastCalculatedInput);
+    }
+
+    @Test
+    public void testRestore_withLastInputAndCalculationFailed_discardsLastInput() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("bmi_state.has_last_input", true);
+        bundle.putDouble("bmi_state.last_weight_kg", 65.0);
+        bundle.putDouble("bmi_state.last_height_cm", 168.0);
+        bundle.putBoolean("bmi_state.calculation_failed", true);
+
+        UiState restoredState = UiStateStore.restore(bundle);
+
+        assertNull(restoredState.lastCalculatedInput);
+        assertTrue(restoredState.calculationFailed);
     }
 }
