@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ระยะห่างหลักของหน้าจอและแต่ละส่วน -->
     <dimen name="screen_padding">16dp</dimen>
     <dimen name="section_gap">16dp</dimen>
     <dimen name="field_gap">12dp</dimen>
+
+    <!-- ขนาดและลักษณะของแผงแสดงผล BMI -->
+    <dimen name="result_panel_min_height">160dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <!-- ขนาดข้อความที่ใช้ร่วมกันทั้งแอป -->
     <dimen name="text_body">16sp</dimen>
     <dimen name="text_title">24sp</dimen>
     <dimen name="text_bmi_value_size">32sp</dimen>
+
 </resources>
