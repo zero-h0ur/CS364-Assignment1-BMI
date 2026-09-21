@@ -39,14 +39,14 @@ public class FormBinderTest {
     public void setUp() {
         context = ApplicationProvider.getApplicationContext();
         root = LayoutInflater.from(context).inflate(R.layout.view_bmi_form, null);
-        
+
         inputWeight = root.findViewById(R.id.input_weight);
         inputHeight = root.findViewById(R.id.input_height);
         buttonCalculate = root.findViewById(R.id.button_calculate);
 
         listener = new TestListener();
         BmiTextFormatter formatter = new BmiTextFormatter(context);
-        
+
         formBinder = new FormBinder(root, formatter, listener);
     }
 
@@ -54,14 +54,14 @@ public class FormBinderTest {
     public void validData_CallsOnCalculateRequestedOnly() {
         inputWeight.setText("65");
         inputHeight.setText("168");
-        
+
         listener.reset();
         buttonCalculate.performClick();
-        
+
         assertTrue(listener.onCalculateRequestedCalled);
         assertFalse(listener.onValidationFailedCalled);
         assertFalse(listener.onInputChangedCalled); // Not called on button click
-        
+
         assertEquals(65.0, listener.input.weightKg, 0.0001);
         assertEquals(168.0, listener.input.heightCm, 0.0001);
     }
@@ -70,13 +70,13 @@ public class FormBinderTest {
     public void invalidData_CallsOnValidationFailedAndShowsError() {
         inputWeight.setText("");
         inputHeight.setText("abc");
-        
+
         listener.reset();
         buttonCalculate.performClick();
-        
+
         assertFalse(listener.onCalculateRequestedCalled);
         assertTrue(listener.onValidationFailedCalled);
-        
+
         // Check errors are shown
         assertTrue(inputWeight.getError() != null && !inputWeight.getError().toString().isEmpty());
         assertTrue(inputHeight.getError() != null && !inputHeight.getError().toString().isEmpty());
@@ -88,15 +88,15 @@ public class FormBinderTest {
         inputWeight.setText("");
         buttonCalculate.performClick();
         assertTrue(inputWeight.getError() != null);
-        
+
         listener.reset();
-        
+
         // Edit text
         inputWeight.setText("6");
-        
+
         // Error should be cleared
         assertNull(inputWeight.getError());
-        
+
         // Callback should be fired
         assertTrue(listener.onInputChangedCalled);
         assertFalse(listener.onCalculateRequestedCalled);
@@ -106,19 +106,19 @@ public class FormBinderTest {
     @Test
     public void restore_RestoresTextAndErrorWithoutCallbacks() {
         FormSnapshot snapshot = new FormSnapshot("65", "168", InputError.NONE, InputError.INVALID_NUMBER);
-        
+
         listener.reset();
-        
+
         formBinder.restore(snapshot);
-        
+
         // Texts restored
         assertEquals("65", inputWeight.getText().toString());
         assertEquals("168", inputHeight.getText().toString());
-        
+
         // Errors restored (height has error, weight doesn't)
         assertNull(inputWeight.getError());
         assertTrue(inputHeight.getError() != null);
-        
+
         // No callbacks should have been fired
         assertFalse(listener.onCalculateRequestedCalled);
         assertFalse(listener.onValidationFailedCalled);
