@@ -259,5 +259,5 @@ Repository นี้ไม่ Commit ไฟล์ต่อไปนี้:
 - Log และไฟล์ระบบปฏิบัติการ
 
 ## Demo Video
-- [Demo Video (Sources)](video/DemoVideo.mp4)
+- [Demo Video (Sources)](video)
 - [Youtube URL](https://youtu.be/UYuRbiQOUnw)
