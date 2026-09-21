@@ -1,128 +1,170 @@
-# ส่วน E — ภาษาและรูปแบบข้อความ
+# ภาษาและการจัดรูปแบบผลลัพธ์ BMI
 
-## 1 — ข้อความสองภาษา
+เอกสารนี้อธิบายการรองรับภาษาอังกฤษ–ภาษาไทย และการจัดรูปแบบผลลัพธ์ของแอป BMI หลังรวมงานทุกส่วนแล้ว
 
-เตรียมข้อความภาษาอังกฤษและภาษาไทยสำหรับแอป BMI รวม **23 keys ต่อภาษา** โดยใช้ชื่อ key ตรงกันทั้งสองไฟล์
+## 1. String Resources
+
+แอปมีข้อความจำนวน **26 keys ต่อภาษา** โดยใช้ชื่อ key ตรงกันทั้งสองไฟล์:
 
 | ไฟล์ | หน้าที่ |
-| --- | --- |
-| `app/src/main/res/values/strings.xml` | ข้อความภาษาอังกฤษและข้อความสำรองสำหรับภาษาที่ไม่ได้รองรับ |
-| `app/src/main/res/values-th/strings.xml` | ข้อความภาษาไทย |
+|---|---|
+| `app/src/main/res/values/strings.xml` | ภาษาอังกฤษและข้อความเริ่มต้นสำหรับภาษาที่ไม่มีคำแปล |
+| `app/src/main/res/values-th/strings.xml` | ภาษาไทย |
 
-ข้อความครอบคลุมชื่อแอป คำอธิบายขอบเขตผู้ใช้ ป้ายช่องกรอก ปุ่มคำนวณ ผลลัพธ์ หน่วย ข้อความผิดพลาด และเกณฑ์ BMI ทั้ง 8 แบบ
+ข้อความครอบคลุม:
 
-### การนำไปใช้
+- ชื่อแอปและคำอธิบายขอบเขตผู้ใช้
+- หัวข้อและคำแนะนำของแบบฟอร์ม
+- ป้ายและ Hint ของช่องน้ำหนักกับส่วนสูง
+- ปุ่มคำนวณ
+- หัวข้อและข้อความในส่วนผลลัพธ์
+- ข้อความตรวจสอบข้อมูล
+- รูปแบบค่า BMI พร้อมหน่วย
+- ชื่อหมวด BMI ทั้ง 8 หมวด
 
-ใน XML ให้เรียกผ่าน `@string/ชื่อ_key` เช่น:
+ใน XML เรียกข้อความผ่าน String Resource เช่น:
 
 ```xml
 android:text="@string/action_calculate"
 ```
 
-ใน Java ให้เรียกผ่าน resources เช่น:
+ใน Java เรียกผ่าน `Context` เช่น:
 
 ```java
 context.getString(R.string.action_calculate);
 ```
 
-A, C และ D สามารถใช้ key ที่เตรียมไว้กับหน้าจอของตนได้ โดยไม่เขียนข้อความไทยหรืออังกฤษตรง ๆ ใน Java หรือ Layout หากต้องเพิ่มข้อความ ให้ประสาน E เพื่อเพิ่มทั้งสองภาษาให้ครบ
+ข้อความที่ผู้ใช้มองเห็นจึงไม่ได้เขียนตรงไว้ใน Java หรือ Layout และ Android จะเลือกภาษาให้ตามภาษาของอุปกรณ์โดยอัตโนมัติ
 
-### สถานะ
+## 2. คลาสจัดรูปแบบข้อความ
 
-ตรวจรูปแบบ XML และชื่อ key ทั้งสองภาษาแล้ว ยังต้องตรวจข้อความบนหน้าจอจริงและการจัดวางหลังรวมแอป
+ไฟล์ที่เกี่ยวข้องอยู่ใน:
 
-## 2 — จัดรูปแบบผลลัพธ์
-
-เตรียมคลาสสำหรับแปลงผลคำนวณและรหัสข้อผิดพลาดเป็นข้อความตามภาษาของ Context ปัจจุบัน
-
-ไฟล์ Java ทั้งสองอยู่ใต้ `app/src/main/java/com/example/bmiassignment/presentation/`
+```text
+app/src/main/java/com/example/bmiassignment/presentation/
+```
 
 | ไฟล์ | หน้าที่ |
-| --- | --- |
-| `ResultText.java` | เก็บ `valueText` สำหรับค่า BMI พร้อมหน่วย และ `categoryText` สำหรับข้อความเกณฑ์ |
-| `BmiTextFormatter.java` | จัดรูปแบบตัวเลข เลือกข้อความเกณฑ์ และสร้างข้อความ error หรือสถานะเริ่มต้น |
+|---|---|
+| `ResultText.java` | เก็บข้อความค่า BMI และชื่อหมวดที่พร้อมแสดง |
+| `BmiTextFormatter.java` | จัดรูปแบบตัวเลข หน่วย หมวด BMI และข้อความผิดพลาดตามภาษา |
 
-### เมธอดสำหรับนำไปใช้
+### Public API
 
 | เมธอด | ผลลัพธ์ |
-| --- | --- |
-| `format(BmiResult result)` | คืน `ResultText` ที่พร้อมนำไปแสดง |
-| `inputError(InputError error)` | คืนข้อความ error โดย `NONE` คืนสตริงว่าง |
-| `emptyMessage()` | คืนข้อความแนะนำก่อนคำนวณ |
+|---|---|
+| `format(BmiResult result)` | คืน `ResultText` ที่มีค่า BMI พร้อมหน่วยและชื่อหมวด |
+| `inputError(InputError error)` | คืนข้อความตรวจสอบข้อมูล โดย `NONE` คืนข้อความว่าง |
+| `emptyMessage()` | คืนคำแนะนำก่อนคำนวณ |
 | `calculationErrorMessage()` | คืนข้อความเมื่อคำนวณไม่สำเร็จ |
 
-ตัวอย่างสำหรับ A ภายใน Activity เมื่อมี `BmiResult result` และ `resultBinder` แล้ว:
+ตัวอย่างการใช้งาน:
 
 ```java
 BmiTextFormatter formatter = new BmiTextFormatter(this);
 ResultText text = formatter.format(result);
-
 resultBinder.showResult(result, text);
 ```
 
-C เรียก `formatter.inputError(error)` เพื่อรับข้อความผิดพลาด สำหรับ `InputError.NONE` ให้ล้าง error ของ View
+## 3. กติกาการจัดรูปแบบ
 
-### กติกาการจัดรูปแบบ
+- แสดงค่า BMI ด้วยทศนิยม 2 ตำแหน่ง
+- ปัดเศษด้วย `RoundingMode.HALF_UP`
+- ไม่แสดงตัวคั่นหลักพัน
+- ใช้ Locale จาก Resources ของ Activity ปัจจุบัน
+- ใช้ `bmi_value_format` เพื่อเติมหน่วยตามภาษา
+- ใช้ค่า BMI จริงก่อนปัดเศษในการจำแนกหมวด
+- แปลง `BmiCategory` เป็นข้อความด้วย String Resource
+- สร้างข้อความใหม่เมื่อ Activity ถูกสร้างใหม่ เพื่อให้ตรงกับภาษาปัจจุบัน
 
-- แสดงทศนิยม 2 ตำแหน่ง ปัดแบบ `HALF_UP` และไม่มีตัวคั่นหลักพัน
-- ใช้ locale จาก resources ปัจจุบัน แล้วเติมหน่วยผ่าน `bmi_value_format`
-- แปลเกณฑ์จาก `BmiCategory` ที่ B ส่งมา ไม่คำนวณหรือตัดเกณฑ์ใหม่ เช่น `24.999` ที่เป็น `NORMAL` จะแสดง `25.00` และ “ปกติ” เมื่อใช้ภาษาไทย
-- A ต้องสร้าง formatter ใหม่จาก Activity ปัจจุบันเมื่อ Activity ถูกสร้างใหม่ ไม่เก็บ formatter เป็น `static` หรือบันทึกข้อความแปลแล้วลงสถานะ
+ตัวอย่าง:
 
-### สิ่งที่ต้องมีจากเพื่อน
+```text
+น้ำหนัก: 65 kg
+ส่วนสูง: 168 cm
+BMI จริง: 23.030045...
+ค่าที่แสดงภาษาอังกฤษ: 23.03 kg/m²
+ค่าที่แสดงภาษาไทย: 23.03 กก./ม.²
+หมวด: Normal / ปกติ
+```
 
-ตำแหน่งต่อไปนี้อยู่ใต้ `app/src/main/java/com/example/bmiassignment/`
+## 4. หมวด BMI ที่รองรับ
 
-| ไฟล์ | เจ้าของ | ข้อกำหนดที่ E ใช้ |
-| --- | --- | --- |
-| `domain/BmiResult.java` | B | `public final double bmi` และ `public final BmiCategory category` พร้อม constructor ตามลำดับนี้ |
-| `domain/BmiCategory.java` | B | enum เกณฑ์ทั้ง 8 แบบตามเอกสารกลาง |
-| `validation/InputError.java` | C | enum `NONE`, `REQUIRED`, `INVALID_NUMBER`, `NON_POSITIVE` |
+| ค่า BMI | English | ภาษาไทย |
+|---:|---|---|
+| `< 16.0` | Severe thinness | ผอมมาก |
+| `16.0 - < 17.0` | Moderate thinness | ผอมปานกลาง |
+| `17.0 - < 18.5` | Mild thinness | ผอมเล็กน้อย |
+| `18.5 - < 25.0` | Normal | ปกติ |
+| `25.0 - < 30.0` | Overweight | น้ำหนักเกิน |
+| `30.0 - < 35.0` | Obese class I | อ้วนระดับ 1 |
+| `35.0 - < 40.0` | Obese class II | อ้วนระดับ 2 |
+| `≥ 40.0` | Obese class III | อ้วนระดับ 3 |
 
-### สถานะและการตรวจตอนรวมงาน
+## 5. การเชื่อมกับส่วนอื่นของแอป
 
-ยังไม่ได้ build และรันทดสอบร่วมกับคลาสของเพื่อน โค้ดปัจจุบันใช้ API ที่ต้องการ Minimum SDK 24 จึงต้องตรวจให้ตรงกับโครงงานกลางของ A ก่อนรวมงาน
+ลำดับการทำงานหลังรวมระบบ:
 
-ก่อนส่งงาน ให้ตรวจว่า `ResultText.java` มี implementation ครบ เพราะไฟล์นี้ใน ZIP ที่ตรวจครั้งแรกยังว่างอยู่ หลังได้คลาส B/C ครบแล้วจึง build และรันชุดทดสอบ รวมถึงตรวจการเปลี่ยนภาษาระบบจริงและ Layout ทั้งสองภาษา
+1. `FormBinder` อ่านข้อมูลน้ำหนักและส่วนสูง
+2. `InputValidator` ตรวจรูปแบบและค่าที่กรอก
+3. `BmiCalculator` คำนวณและจำแนก `BmiCategory`
+4. `BmiTextFormatter` สร้างข้อความตามภาษาปัจจุบัน
+5. `ResultBinder` แสดงค่า BMI หมวด และสีประกอบ
+6. `UiStateStore` เก็บข้อมูลเพื่อคืนสถานะเมื่อ Activity ถูกสร้างใหม่
 
-## 3 — เตรียมทดสอบ
+ระบบรองรับภาษาอังกฤษและภาษาไทยทั้งในสถานะเริ่มต้น ผลลัพธ์สำเร็จ และข้อความผิดพลาด
 
-เตรียม automated tests สำหรับตรวจข้อความและรูปแบบตัวเลขของส่วน E ในไฟล์:
+## 6. Automated Tests
 
-`app/src/androidTest/java/com/example/bmiassignment/presentation/BmiTextFormatterTest.java`
+ไฟล์ทดสอบหลักของส่วนนี้:
 
-เป็น Android instrumented test ใช้ `AndroidJUnit4` และต้องรันบน Emulator หรืออุปกรณ์ Android โดยสร้าง Context แยกตาม locale เพื่อทดสอบ formatter ไม่เปลี่ยนภาษาระบบจริงและไม่เรียกสูตรคำนวณของ B ข้อมูล `BmiResult` ตัวอย่างถูกสร้างเฉพาะใน test
+```text
+app/src/androidTest/java/com/example/bmiassignment/presentation/BmiTextFormatterTest.java
+```
 
-### ขอบเขตที่เตรียมทดสอบ
+มี 12 test methods ครอบคลุม:
 
-ในไฟล์มี 12 test methods ครอบคลุมกรณีต่อไปนี้:
+- ค่าและหมวดภาษาอังกฤษ
+- ค่าและหมวดภาษาไทย
+- การแสดงทศนิยม 2 ตำแหน่ง
+- การปัดแบบ `HALF_UP`
+- การคงหมวดเดิมหลังจัดรูปแบบตัวเลข
+- การไม่ใช้ตัวคั่นหลักพัน
+- การใช้ Locale จาก Resources
+- ชื่อหมวด BMI ทั้ง 8 หมวด
+- `InputError` ทุกสถานะทั้งสองภาษา
+- ข้อความเริ่มต้นและข้อความคำนวณผิดพลาดทั้งสองภาษา
 
-| กรณี | ผลที่คาดหวัง |
-| --- | --- |
-| ค่าและเกณฑ์ภาษาอังกฤษ | `23.030045` กับ `NORMAL` แสดง `23.03 kg/m²` และ `Normal` |
-| ค่าและเกณฑ์ภาษาไทย | แสดง `23.03 กก./ม.²` และ `ปกติ` |
-| จำนวนเต็ม | `25.0` แสดง `25.00 kg/m²` |
-| การปัด HALF_UP | `22.865` แสดง `22.87 kg/m²` |
-| ไม่จัดเกณฑ์ใหม่หลังปัด | `24.999` กับ `NORMAL` แสดง `25.00 kg/m²` และยังเป็น `Normal` |
-| ไม่ใส่ตัวคั่นหลักพัน | `1234.5` แสดง `1234.50 kg/m²` เป็นข้อมูลสังเคราะห์เพื่อทดสอบรูปแบบเท่านั้น |
-| locale ที่ไม่มีคำแปลเฉพาะ | `de-DE` ใช้ comma เป็นทศนิยม เช่น `23,03 kg/m²` และใช้ข้อความอังกฤษสำรอง |
-| เกณฑ์ BMI ทุก enum | คำแปลถูกต้องทั้ง 8 เกณฑ์ ทั้งไทยและอังกฤษ |
-| InputError ทุก enum | ตรวจทั้งสองภาษา รวม `NONE` ที่ต้องคืนสตริงว่าง |
-| ข้อความสถานะ | ข้อความก่อนคำนวณและคำนวณไม่สำเร็จถูกต้องทั้งสองภาษา |
+ข้อความที่เขียนตรงใน Test เป็น Expected Value สำหรับตรวจผล ไม่ใช่ข้อความ UI ของแอป
 
-ข้อความที่เขียนตรง ๆ ใน test เป็นค่าคาดหวังสำหรับตรวจเทียบ ไม่ใช่ข้อความ UI ในโค้ดแอป
+## 7. วิธีตรวจสอบ
 
-### สิ่งที่ต้องพร้อมก่อนรัน
+Compile ชุด Android Tests:
 
-- B ส่ง `BmiResult` และ `BmiCategory` ตามสัญญากลาง และ C ส่ง `InputError` แล้ว
-- `ResultText.java` มี implementation ครบ และ string resources ทั้งสองภาษาพร้อม
-- A ตรวจ Gradle ให้มี dependencies ของ AndroidX Test/JUnit และ instrumented test runner ที่เหมาะสม โดย E ไม่เปลี่ยนเวอร์ชัน build แยกจากทีม
-- โครงงาน build ผ่าน และอุปกรณ์ทดสอบรองรับ API ที่โค้ดใช้ (ปัจจุบัน API 24 ขึ้นไป)
+```bash
+./gradlew assembleDebugAndroidTest
+```
 
-### วิธีรัน
+รัน Instrumented Tests โดยเปิด Emulator หรือเชื่อมต่ออุปกรณ์ก่อน:
 
-1. เปิดโปรเจกต์กลางใน Android Studio และรอ Gradle Sync เสร็จ
-2. เปิด Emulator หรือเชื่อมต่ออุปกรณ์ Android สำหรับทดสอบ
-3. เปิด `BmiTextFormatterTest.java` ใต้ `androidTest`
-4. รัน test ทั้งคลาสจากปุ่ม Run ข้างชื่อคลาส หรือเมนู Run ของไฟล์ แล้วเลือกอุปกรณ์
-5. บันทึกจำนวน tests ที่ผ่าน/ไม่ผ่าน พร้อมข้อความ failure หากมี
+```bash
+./gradlew connectedDebugAndroidTest
+```
+
+ผลการตรวจล่าสุดบน Pixel 6a AVD, Android 15, API 35:
+
+- Android-test APK Compile สำเร็จ
+- Instrumented Tests ผ่าน `34/34`
+- ภาษาอังกฤษและภาษาไทยแสดงถูกต้อง
+- ค่า BMI แสดงทศนิยม 2 ตำแหน่ง
+- หมวด BMI แสดงตรงกับผลคำนวณ
+- การเปลี่ยนภาษาและการสร้าง Activity ใหม่แสดงข้อความตามภาษาปัจจุบัน
+
+## 8. สถานะปัจจุบัน
+
+- `ResultText` มี implementation ครบ
+- Dependency จากสมาชิก B และ C รวมใน `main` แล้ว
+- Localization เชื่อมกับ `MainActivity` และ `ResultBinder` แล้ว
+- Minimum SDK คือ API 28
+- Build, Unit Tests, Android-test Compile และ Instrumented Tests ผ่าน
+- ไม่มีข้อความ UI ภาษาอังกฤษหรือภาษาไทย Hard-code ใน Java หรือ Layout

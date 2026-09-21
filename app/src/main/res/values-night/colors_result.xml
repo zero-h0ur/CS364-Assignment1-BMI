@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        สีของหมวด BMI สำหรับ Dark mode
+        ปรับให้สว่างขึ้นเพื่ออ่านได้ชัดเจนบนพื้นหลังมืด
+    -->
+    <color name="bmi_underweight">#8AB4F8</color>
+    <color name="bmi_normal">#70D6B8</color>
+    <color name="bmi_overweight">#FFB86B</color>
+    <color name="bmi_obese">#FF8A9A</color>
+
+    <!-- สีข้อความและพื้น Result ตามชุดสี Dark mode -->
+    <color name="bmi_result_value">@color/bmi_text_primary</color>
+    <color name="bmi_result_neutral">@color/bmi_text_secondary</color>
+    <color name="bmi_result_error">@color/bmi_obese</color>
+
+</resources>

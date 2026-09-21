@@ -6,8 +6,8 @@
     android:fillViewport="true">
 
     <!--
-        หน้าจอที่กว้างตั้งแต่ 600dp ใช้พื้นที่แบบสองคอลัมน์
-        ทั้งในแนวตั้งและแนวนอนของ Tablet
+        หน้าจอแนวนอนวาง Header ด้านบน
+        และจัด Form กับ Result เป็นสองคอลัมน์ด้านล่าง
     -->
     <LinearLayout
         android:id="@+id/screen_root"
@@ -26,8 +26,7 @@
             android:layout_height="@dimen/section_gap" />
 
         <!--
-            แบ่งพื้นที่ Form และ Result เท่ากัน
-            โดยยืดหรือหดตามความกว้างของอุปกรณ์
+            แถวเนื้อหาหลักแบ่งพื้นที่ให้ Form และ Result เท่ากัน
         -->
         <LinearLayout
             android:id="@+id/content_columns"
@@ -36,6 +35,10 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
+            <!--
+                0dp ใช้ร่วมกับ layout_weight
+                เพื่อให้คอลัมน์ซ้ายและขวายืดตามความกว้างหน้าจอ
+            -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

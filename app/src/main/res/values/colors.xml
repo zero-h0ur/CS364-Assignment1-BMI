@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- สีพื้นฐานที่ Android Studio สร้างไว้ -->
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!--
+        ชุดสี BMI Compass
+        ใช้ชื่อสีตามหน้าที่ เพื่อให้เปลี่ยน Theme ได้โดยไม่ต้องแก้ Layout
+    -->
+    <color name="bmi_canvas">#F4F8F6</color>
+    <color name="bmi_surface">#FFFFFFFF</color>
+    <color name="bmi_surface_soft">#E6F1ED</color>
+
+    <!-- สีหลักสื่อถึงสุขภาพและความสมดุล -->
+    <color name="bmi_primary">#0B6B57</color>
+    <color name="bmi_primary_dark">#075044</color>
+    <color name="bmi_on_primary">#FFFFFFFF</color>
+
+    <!-- สีเน้นสำหรับองค์ประกอบสำคัญของหน้าจอ -->
+    <color name="bmi_accent">#F08A5D</color>
+
+    <!-- สีข้อความและเส้นขอบบนพื้นหลังโหมดสว่าง -->
+    <color name="bmi_text_primary">#17352D</color>
+    <color name="bmi_text_secondary">#526A62</color>
+    <color name="bmi_outline">#B8CBC5</color>
+
 </resources>

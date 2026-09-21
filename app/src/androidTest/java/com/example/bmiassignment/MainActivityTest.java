@@ -7,6 +7,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.Visibility.GONE;
+import static androidx.test.espresso.matcher.ViewMatchers.Visibility.VISIBLE;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
@@ -47,6 +48,60 @@ public final class MainActivityTest {
     }
 
     @Test
+    public void calculatingAgain_updatesResultFromLatestInput() {
+        ActivityScenario<MainActivity> scenario =
+                ActivityScenario.launch(MainActivity.class);
+
+        try {
+            /*
+             * คำนวณครั้งแรกด้วยน้ำหนัก 65 กิโลกรัม
+             * และส่วนสูง 168 เซนติเมตร
+             */
+            enterValidInput();
+            calculate();
+            assertSuccessfulResult();
+
+            /*
+             * เปลี่ยนข้อมูลเป็นน้ำหนัก 80 กิโลกรัม
+             * และส่วนสูง 180 เซนติเมตร
+             */
+            onView(withId(R.id.input_weight))
+                    .perform(
+                            scrollTo(),
+                            replaceText("80"),
+                            closeSoftKeyboard()
+                    );
+
+            onView(withId(R.id.input_height))
+                    .perform(
+                            scrollTo(),
+                            replaceText("180"),
+                            closeSoftKeyboard()
+                    );
+
+            /*
+             * กดคำนวณอีกครั้ง เพื่อยืนยันว่าผลลัพธ์
+             * ใช้ข้อมูลล่าสุดแทนค่าจากการคำนวณครั้งแรก
+             */
+            calculate();
+
+            Context context = InstrumentationRegistry
+                    .getInstrumentation()
+                    .getTargetContext();
+
+            BmiResult latestResult = BmiCalculator.calculate(
+                    new BmiInput(80.0, 180.0)
+            );
+
+            ResultText expected = new BmiTextFormatter(context)
+                    .format(latestResult);
+            assertDisplayedResult(expected);
+        } finally {
+            scenario.close();
+        }
+    }
+
+    @Test
     public void editingInputAfterCalculation_clearsPreviousResult() {
         ActivityScenario<MainActivity> scenario =
                 ActivityScenario.launch(MainActivity.class);
@@ -55,6 +110,10 @@ public final class MainActivityTest {
             enterValidInput();
             calculate();
 
+            /*
+             * เมื่อแก้น้ำหนักหลังจากคำนวณแล้ว
+             * ผลลัพธ์เก่าต้องถูกล้างเพื่อไม่ให้ผู้ใช้เข้าใจผิด
+             */
             onView(withId(R.id.input_weight))
                     .perform(
                             scrollTo(),
@@ -158,20 +217,25 @@ public final class MainActivityTest {
     }
 
     private static void assertSuccessfulResult() {
-        ResultText expected = expectedResultText();
+        assertDisplayedResult(expectedResultText());
+    }
 
+    private static void assertDisplayedResult(ResultText expected) {
+        /*
+         * ตรวจสถานะ VISIBLE และข้อความโดยไม่บังคับให้ Result Card
+         * ทั้งใบต้องอยู่ในพื้นที่จอพร้อมกัน เพราะผู้ใช้สามารถเลื่อน
+         * ScrollView ได้เมื่อใช้จอเล็กหรือ Font size ขนาดใหญ่
+         */
         onView(withId(R.id.text_result_message))
                 .check(matches(withEffectiveVisibility(GONE)));
 
         onView(withId(R.id.text_bmi_value))
-                .perform(scrollTo())
                 .check(matches(withText(expected.valueText)))
-                .check(matches(isDisplayed()));
+                .check(matches(withEffectiveVisibility(VISIBLE)));
 
         onView(withId(R.id.text_bmi_category))
-                .perform(scrollTo())
                 .check(matches(withText(expected.categoryText)))
-                .check(matches(isDisplayed()));
+                .check(matches(withEffectiveVisibility(VISIBLE)));
     }
 
     private static ResultText expectedResultText() {

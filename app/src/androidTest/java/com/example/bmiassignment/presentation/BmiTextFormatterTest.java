@@ -227,8 +227,12 @@ public class BmiTextFormatterTest {
     public void messages_english() {
         BmiTextFormatter formatter = formatterFor("en-US");
 
+        /*
+         * ข้อความที่ Test คาดหวังต้องตรงกับ String Resource
+         * ที่แสดงบนปุ่มและ Result Card เวอร์ชันปัจจุบัน
+         */
         assertEquals(
-                "Enter weight and height, then tap Calculate.",
+                "Enter weight and height, then tap Calculate BMI.",
                 formatter.emptyMessage()
         );
         assertEquals(
@@ -237,12 +241,17 @@ public class BmiTextFormatterTest {
         );
     }
 
+
     @Test
     public void messages_thai() {
         BmiTextFormatter formatter = formatterFor("th-TH");
 
+        /*
+         * ตรวจว่าข้อความภาษาไทยใช้คำว่า BMI
+         * ตรงกับปุ่มคำนวณและข้อความแนะนำบนหน้าจอ
+         */
         assertEquals(
-                "กรอกน้ำหนักและส่วนสูง แล้วกดคำนวณ",
+                "กรอกน้ำหนักและส่วนสูง แล้วกดคำนวณ BMI",
                 formatter.emptyMessage()
         );
         assertEquals(

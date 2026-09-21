@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bmi_header"
+    android:elevation="@dimen/card_elevation"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/card_padding"
+    android:paddingTop="@dimen/header_vertical_padding"
+    android:paddingEnd="@dimen/card_padding"
+    android:paddingBottom="@dimen/header_vertical_padding">
+
+    <!-- ชื่อหน้าจอหลัก ซึ่งปรับภาษาตามภาษาของอุปกรณ์ -->
+    <TextView
+        android:id="@+id/text_app_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:accessibilityHeading="true"
+        android:text="@string/app_title"
+        android:textColor="@color/bmi_on_primary"
+        android:textSize="@dimen/text_header"
+        android:textStyle="bold" />
+
+    <!-- ระบุขอบเขตของเกณฑ์ BMI ที่แอปใช้ -->
+    <TextView
+        android:id="@+id/text_adult_scope"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/compact_gap"
+        android:text="@string/adult_scope"
+        android:textColor="@color/bmi_on_primary"
+        android:textSize="@dimen/text_caption" />
+
+</LinearLayout>

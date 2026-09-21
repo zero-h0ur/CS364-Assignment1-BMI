@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bmi_underweight">#1565C0</color>
-    <color name="bmi_normal">#2E7D32</color>
-    <color name="bmi_overweight">#8D4E00</color>
-    <color name="bmi_obese">#B71C1C</color>
 
-    <color name="bmi_result_value">#1F1F1F</color>
-    <color name="bmi_result_neutral">#5F6368</color>
-    <color name="bmi_result_error">#B71C1C</color>
-    <color name="bmi_result_background">#FFFFFF</color>
+    <!--
+        สีของหมวด BMI สำหรับโหมดสว่าง
+        แต่ละสีเข้มพอที่จะอ่านบนพื้นผิวสีอ่อน
+    -->
+    <color name="bmi_underweight">#2563A9</color>
+    <color name="bmi_normal">#18765F</color>
+    <color name="bmi_overweight">#A85A00</color>
+    <color name="bmi_obese">#B3263A</color>
+
+    <!--
+        สีของ Result UI อ้างจากชุดสี BMI Compass
+        เมื่อเปลี่ยน Theme สีเหล่านี้จะเปลี่ยนตาม Resource ที่เกี่ยวข้อง
+    -->
+    <color name="bmi_result_value">@color/bmi_text_primary</color>
+    <color name="bmi_result_neutral">@color/bmi_text_secondary</color>
+    <color name="bmi_result_error">@color/bmi_obese</color>
+
 </resources>

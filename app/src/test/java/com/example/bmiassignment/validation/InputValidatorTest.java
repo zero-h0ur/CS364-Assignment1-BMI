@@ -98,4 +98,67 @@ public class InputValidatorTest {
         assertEquals(InputError.NON_POSITIVE, result.weightError);
         assertEquals(InputError.NONE, result.heightError);
     }
+
+    @Test
+    public void valuesAtMaximumDigitLimits_ReturnValidResult() {
+        /*
+         * จำนวนเต็ม 8 หลักและทศนิยม 2 ตำแหน่ง
+         * เป็นค่าสูงสุดที่ข้อกำหนดอนุญาต
+         */
+        InputValidationResult result = InputValidator.validate(
+                "12345678.90",
+                "12345678.90"
+        );
+
+        assertTrue(result.isValid());
+        assertEquals(InputError.NONE, result.weightError);
+        assertEquals(InputError.NONE, result.heightError);
+    }
+
+    @Test
+    public void moreThanEightIntegerDigits_ReturnInvalidNumberError() {
+        /*
+         * ช่องน้ำหนักมีจำนวนเต็ม 9 หลัก จึงต้องไม่ผ่าน
+         * ช่องส่วนสูงมีจำนวนเต็ม 8 หลักและทศนิยม 2 ตำแหน่ง
+         * จึงยังต้องผ่านตามปกติ
+         */
+        InputValidationResult result = InputValidator.validate(
+                "123456789",
+                "12345678.90"
+        );
+
+        assertFalse(result.isValid());
+        assertNull(result.input);
+        assertEquals(
+                InputError.INVALID_NUMBER,
+                result.weightError
+        );
+        assertEquals(
+                InputError.NONE,
+                result.heightError
+        );
+    }
+
+    @Test
+    public void moreThanTwoFractionDigits_ReturnInvalidNumberError() {
+        /*
+         * ช่องน้ำหนักมีทศนิยม 3 ตำแหน่ง จึงต้องไม่ผ่าน
+         * ช่องส่วนสูงมีทศนิยม 2 ตำแหน่ง จึงยังต้องผ่าน
+         */
+        InputValidationResult result = InputValidator.validate(
+                "65.123",
+                "168.12"
+        );
+
+        assertFalse(result.isValid());
+        assertNull(result.input);
+        assertEquals(
+                InputError.INVALID_NUMBER,
+                result.weightError
+        );
+        assertEquals(
+                InputError.NONE,
+                result.heightError
+        );
+    }
 }

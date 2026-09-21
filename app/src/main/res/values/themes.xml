@@ -1,9 +1,44 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.BMICalculator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Theme หลักของแอปในโหมดสว่าง
+        สีทุกตัวอ้างจาก Color Resource เพื่อไม่ให้ Theme มีสี Hard-code
+    -->
+    <style
+        name="Base.Theme.BMICalculator"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- สีหลักของปุ่มและองค์ประกอบที่โต้ตอบได้ -->
+        <item name="colorPrimary">@color/bmi_primary</item>
+        <item name="colorOnPrimary">@color/bmi_on_primary</item>
+
+        <!-- สีของพื้นผิวที่ใช้เน้นบางส่วนของหน้าจอ -->
+        <item name="colorPrimaryContainer">@color/bmi_surface_soft</item>
+        <item name="colorOnPrimaryContainer">@color/bmi_text_primary</item>
+
+        <!-- สีรองสำหรับจุดเน้นของ BMI Compass -->
+        <item name="colorSecondary">@color/bmi_accent</item>
+        <item name="colorOnSecondary">@color/bmi_text_primary</item>
+
+        <!-- สีพื้นผิว ข้อความ และเส้นขอบ -->
+        <item name="colorSurface">@color/bmi_surface</item>
+        <item name="colorOnSurface">@color/bmi_text_primary</item>
+        <item name="colorOutline">@color/bmi_outline</item>
+
+        <!-- สีพื้นหลังของ Window และ System bars -->
+        <item name="android:windowBackground">@color/bmi_canvas</item>
+        <item name="android:statusBarColor">@color/bmi_canvas</item>
+        <item name="android:navigationBarColor">@color/bmi_canvas</item>
+
+        <!-- ใช้ไอคอนสีเข้มบน System bars ของโหมดสว่าง -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
     </style>
 
-    <style name="Theme.BMICalculator" parent="Base.Theme.BMICalculator" />
+    <style
+        name="Theme.BMICalculator"
+        parent="Base.Theme.BMICalculator" />
+
 </resources>

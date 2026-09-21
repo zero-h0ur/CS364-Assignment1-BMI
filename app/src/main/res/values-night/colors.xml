@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        ชุดสี BMI Compass สำหรับ Dark mode
+        ใช้ชื่อเดียวกับโหมดสว่าง Android จึงเลือกสีให้อัตโนมัติ
+    -->
+    <color name="bmi_canvas">#0F1D1A</color>
+    <color name="bmi_surface">#172722</color>
+    <color name="bmi_surface_soft">#213832</color>
+
+    <!-- สีหลักปรับให้สว่างขึ้นเพื่ออ่านได้บนพื้นหลังมืด -->
+    <color name="bmi_primary">#66D6BB</color>
+    <color name="bmi_primary_dark">#42B79C</color>
+    <color name="bmi_on_primary">#062A22</color>
+
+    <!-- สีเน้นของ Dark mode -->
+    <color name="bmi_accent">#FFAB83</color>
+
+    <!-- สีข้อความและเส้นขอบบนพื้นหลังโหมดมืด -->
+    <color name="bmi_text_primary">#E6F4EF</color>
+    <color name="bmi_text_secondary">#B7CBC4</color>
+    <color name="bmi_outline">#49665D</color>
+
+</resources>
