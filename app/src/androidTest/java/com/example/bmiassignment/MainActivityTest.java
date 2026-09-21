@@ -47,6 +47,72 @@ public final class MainActivityTest {
     }
 
     @Test
+    public void calculatingAgain_updatesResultFromLatestInput() {
+        ActivityScenario<MainActivity> scenario =
+                ActivityScenario.launch(MainActivity.class);
+
+        try {
+            /*
+             * คำนวณครั้งแรกด้วยน้ำหนัก 65 กิโลกรัม
+             * และส่วนสูง 168 เซนติเมตร
+             */
+            enterValidInput();
+            calculate();
+            assertSuccessfulResult();
+
+            /*
+             * เปลี่ยนข้อมูลเป็นน้ำหนัก 80 กิโลกรัม
+             * และส่วนสูง 180 เซนติเมตร
+             */
+            onView(withId(R.id.input_weight))
+                    .perform(
+                            scrollTo(),
+                            replaceText("80"),
+                            closeSoftKeyboard()
+                    );
+
+            onView(withId(R.id.input_height))
+                    .perform(
+                            scrollTo(),
+                            replaceText("180"),
+                            closeSoftKeyboard()
+                    );
+
+            /*
+             * กดคำนวณอีกครั้ง เพื่อยืนยันว่าผลลัพธ์
+             * ใช้ข้อมูลล่าสุดแทนค่าจากการคำนวณครั้งแรก
+             */
+            calculate();
+
+            Context context = InstrumentationRegistry
+                    .getInstrumentation()
+                    .getTargetContext();
+
+            BmiResult latestResult = BmiCalculator.calculate(
+                    new BmiInput(80.0, 180.0)
+            );
+
+            ResultText expected = new BmiTextFormatter(context)
+                    .format(latestResult);
+
+            onView(withId(R.id.text_result_message))
+                    .check(matches(withEffectiveVisibility(GONE)));
+
+            onView(withId(R.id.text_bmi_value))
+                    .perform(scrollTo())
+                    .check(matches(withText(expected.valueText)))
+                    .check(matches(isDisplayed()));
+
+            onView(withId(R.id.text_bmi_category))
+                    .perform(scrollTo())
+                    .check(matches(withText(expected.categoryText)))
+                    .check(matches(isDisplayed()));
+        } finally {
+            scenario.close();
+        }
+    }
+
+    @Test
     public void editingInputAfterCalculation_clearsPreviousResult() {
         ActivityScenario<MainActivity> scenario =
                 ActivityScenario.launch(MainActivity.class);
