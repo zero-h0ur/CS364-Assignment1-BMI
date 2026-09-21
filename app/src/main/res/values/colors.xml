@@ -3,7 +3,6 @@
 
     <!-- สีพื้นฐานที่ Android Studio สร้างไว้ -->
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
     <!--
         ชุดสี BMI Compass

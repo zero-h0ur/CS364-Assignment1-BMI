@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:accessibilityLiveRegion="polite"
     android:background="@drawable/bg_bmi_result_card"
-    android:clipToOutline="true"
     android:elevation="@dimen/card_elevation"
     android:gravity="center_horizontal"
     android:minHeight="@dimen/result_panel_min_height"

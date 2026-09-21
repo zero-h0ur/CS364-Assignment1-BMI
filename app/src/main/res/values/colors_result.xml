@@ -17,6 +17,5 @@
     <color name="bmi_result_value">@color/bmi_text_primary</color>
     <color name="bmi_result_neutral">@color/bmi_text_secondary</color>
     <color name="bmi_result_error">@color/bmi_obese</color>
-    <color name="bmi_result_background">@color/bmi_surface</color>
 
 </resources>

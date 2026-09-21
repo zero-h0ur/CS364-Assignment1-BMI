@@ -20,7 +20,6 @@
     <!-- ส่วนแสดงผลลัพธ์ -->
     <string name="result_title">ผล BMI ของคุณ</string>
     <string name="label_bmi">ค่าดัชนีมวลกาย</string>
-    <string name="label_category">เกณฑ์น้ำหนัก</string>
     <string name="result_empty">กรอกน้ำหนักและส่วนสูง แล้วกดคำนวณ BMI</string>
 
     <!-- ข้อความแจ้งข้อผิดพลาด -->

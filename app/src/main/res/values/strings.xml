@@ -20,7 +20,6 @@
     <!-- ส่วนแสดงผลลัพธ์ -->
     <string name="result_title">Your BMI result</string>
     <string name="label_bmi">BMI</string>
-    <string name="label_category">Weight category</string>
     <string name="result_empty">Enter weight and height, then tap Calculate BMI.</string>
 
     <!-- ข้อความแจ้งข้อผิดพลาด -->
