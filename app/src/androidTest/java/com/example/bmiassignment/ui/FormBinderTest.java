@@ -125,6 +125,48 @@ public class FormBinderTest {
         assertFalse(listener.onInputChangedCalled);
     }
 
+    @Test
+    public void inputs_LimitIntegerAndFractionDigits() {
+        /*
+         * ค่าที่มีจำนวนเต็ม 8 หลักและทศนิยม 2 ตำแหน่ง
+         * ต้องสามารถแสดงในช่องกรอกได้ครบ
+         */
+        inputWeight.setText("12345678.90");
+
+        assertEquals(
+                "12345678.90",
+                inputWeight.getText().toString()
+        );
+
+        /*
+         * เมื่อพยายามเพิ่มทศนิยมตำแหน่งที่ 3
+         * DecimalDigitsInputFilter ต้องปฏิเสธตัวเลขใหม่
+         * และข้อความเดิมต้องไม่เปลี่ยน
+         */
+        inputWeight.append("1");
+
+        assertEquals(
+                "12345678.90",
+                inputWeight.getText().toString()
+        );
+
+        /*
+         * จำนวนเต็ม 8 หลักเป็นค่าสูงสุดที่อนุญาต
+         */
+        inputHeight.setText("12345678");
+
+        /*
+         * เมื่อพยายามเพิ่มจำนวนเต็มหลักที่ 9
+         * ตัวกรองต้องปฏิเสธตัวเลขใหม่
+         */
+        inputHeight.append("9");
+
+        assertEquals(
+                "12345678",
+                inputHeight.getText().toString()
+        );
+    }
+
     private static class TestListener implements FormBinder.Listener {
         boolean onCalculateRequestedCalled = false;
         boolean onInputChangedCalled = false;

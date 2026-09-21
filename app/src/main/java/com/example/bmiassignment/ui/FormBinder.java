@@ -1,6 +1,7 @@
 package com.example.bmiassignment.ui;
 
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import com.example.bmiassignment.R;
 import com.example.bmiassignment.domain.BmiInput;
 import com.example.bmiassignment.model.FormSnapshot;
 import com.example.bmiassignment.presentation.BmiTextFormatter;
+import com.example.bmiassignment.validation.DecimalDigitsInputFilter;
 import com.example.bmiassignment.validation.InputError;
 import com.example.bmiassignment.validation.InputValidationResult;
 import com.example.bmiassignment.validation.InputValidator;
@@ -40,6 +42,28 @@ public final class FormBinder {
         inputHeight = root.findViewById(R.id.input_height);
         buttonCalculate = root.findViewById(R.id.button_calculate);
 
+        /*
+         * สร้างตัวกรองตามข้อกำหนดร่วมจาก InputValidator
+         *
+         * การอ้างค่าคงที่จาก InputValidator ช่วยป้องกันไม่ให้
+         * FormBinder และ Validation ใช้จำนวนหลักไม่ตรงกัน
+         */
+        InputFilter decimalFilter = new DecimalDigitsInputFilter(
+                InputValidator.MAX_INTEGER_DIGITS,
+                InputValidator.MAX_FRACTION_DIGITS
+        );
+
+        /*
+         * ใช้ตัวกรองเดียวกันกับช่องน้ำหนักและส่วนสูง
+         * เพราะทั้งสองช่องมีข้อกำหนดจำนวนหลักเหมือนกัน
+         */
+        inputWeight.setFilters(new InputFilter[]{decimalFilter});
+        inputHeight.setFilters(new InputFilter[]{decimalFilter});
+
+        /*
+         * ปิดระบบบันทึก View state อัตโนมัติ
+         * เพราะโปรเจกต์ใช้ UiStateStore ดูแลการ Restore เอง
+         */
         inputWeight.setSaveEnabled(false);
         inputHeight.setSaveEnabled(false);
 
