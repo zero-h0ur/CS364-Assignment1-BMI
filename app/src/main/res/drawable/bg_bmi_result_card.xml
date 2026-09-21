@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!--
+        Result Card ใช้พื้นสีอ่อนกว่าหรือเข้มกว่าพื้น Card ปกติ
+        เพื่อแยกผลการคำนวณให้เห็นชัดเจน
+    -->
+    <solid android:color="@color/bmi_surface_soft" />
+
+    <!-- ใช้สีหลักของ BMI Compass เป็นเส้นขอบ -->
+    <stroke
+        android:width="@dimen/card_stroke_width"
+        android:color="@color/bmi_primary" />
+
+    <!-- ใช้มุมโค้งชุดเดียวกับ Card อื่น -->
+    <corners android:radius="@dimen/card_corner_radius" />
+
+</shape>

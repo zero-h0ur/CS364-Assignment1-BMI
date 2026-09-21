@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- พื้น Card ใช้สีพื้นผิวตาม Light/Dark mode -->
+    <solid android:color="@color/bmi_surface" />
+
+    <!-- เส้นขอบช่วยแยก Card ออกจากพื้นหลังหน้าจอ -->
+    <stroke
+        android:width="@dimen/card_stroke_width"
+        android:color="@color/bmi_outline" />
+
+    <!-- มุมโค้งใช้ค่าร่วมจาก Dimension Resource -->
+    <corners android:radius="@dimen/card_corner_radius" />
+
+</shape>

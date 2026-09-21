@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- ข้อมูลหลักของแอป -->
     <string name="app_name">เครื่องคำนวณ BMI</string>
     <string name="app_title">ดัชนีมวลกาย</string>
-    <string name="adult_scope">เกณฑ์สำหรับผู้ใหญ่อายุ 20 ปี ขึ้นไป</string>
+    <string name="adult_scope">เกณฑ์สำหรับผู้ใหญ่อายุ 20 ปีขึ้นไป</string>
 
+    <!-- หัวข้อและคำแนะนำของแบบฟอร์ม -->
+    <string name="form_title">ข้อมูลร่างกายของคุณ</string>
+    <string name="form_helper">กรอกจำนวนเต็มไม่เกิน 8 หลัก และทศนิยมไม่เกิน 2 ตำแหน่ง</string>
+
+    <!-- ช่องกรอกน้ำหนักและส่วนสูง -->
     <string name="label_weight">น้ำหนัก (กิโลกรัม)</string>
     <string name="label_height">ส่วนสูง (เซนติเมตร)</string>
-    <string name="action_calculate">คำนวณ</string>
+    <string name="hint_weight">เช่น 65.5</string>
+    <string name="hint_height">เช่น 168</string>
+    <string name="action_calculate">คำนวณ BMI</string>
 
-    <string name="result_title">ผลการคำนวณ</string>
+    <!-- ส่วนแสดงผลลัพธ์ -->
+    <string name="result_title">ผล BMI ของคุณ</string>
     <string name="label_bmi">ค่าดัชนีมวลกาย</string>
     <string name="label_category">เกณฑ์น้ำหนัก</string>
-    <string name="result_empty">กรอกน้ำหนักและส่วนสูง แล้วกดคำนวณ</string>
+    <string name="result_empty">กรอกน้ำหนักและส่วนสูง แล้วกดคำนวณ BMI</string>
 
+    <!-- ข้อความแจ้งข้อผิดพลาด -->
     <string name="error_required">กรุณากรอกข้อมูล</string>
     <string name="error_invalid_number">กรุณากรอกตัวเลข โดยใช้จุดสำหรับทศนิยม</string>
     <string name="error_non_positive">กรุณากรอกค่าที่มากกว่า 0</string>
     <string name="error_calculation">ไม่สามารถคำนวณได้ กรุณาตรวจสอบค่าที่กรอก</string>
 
+    <!-- รูปแบบค่า BMI -->
     <string name="bmi_value_format">%1$s กก./ม.²</string>
 
+    <!-- หมวด BMI -->
     <string name="category_severe_thinness">ผอมมาก</string>
     <string name="category_moderate_thinness">ผอมปานกลาง</string>
     <string name="category_mild_thinness">ผอมเล็กน้อย</string>
@@ -28,4 +41,5 @@
     <string name="category_obese_i">อ้วนระดับ 1</string>
     <string name="category_obese_ii">อ้วนระดับ 2</string>
     <string name="category_obese_iii">อ้วนระดับ 3</string>
+
 </resources>
