@@ -3,51 +3,72 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bmi_canvas"
     android:fillViewport="true">
 
     <!--
-        หน้าจอแนวนอนจัดแบบสองคอลัมน์
-        ฝั่งซ้ายเป็นแบบฟอร์ม และฝั่งขวาเป็นผลลัพธ์ BMI
+        หน้าจอแนวนอนวาง Header ด้านบน
+        และจัด Form กับ Result เป็นสองคอลัมน์ด้านล่าง
     -->
     <LinearLayout
         android:id="@+id/screen_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
-        <!--
-            layout_width เป็น 0dp เพื่อให้ layout_weight
-            แบ่งพื้นที่ครึ่งซ้ายและครึ่งขวาเท่ากัน
-        -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <include
-                layout="@layout/view_bmi_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        <include
+            layout="@layout/view_bmi_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Space
-            android:layout_width="@dimen/section_gap"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/section_gap" />
 
+        <!--
+            แถวเนื้อหาหลักแบ่งพื้นที่ให้ Form และ Result เท่ากัน
+        -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/content_columns"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-            <include
-                layout="@layout/view_bmi_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--
+                0dp ใช้ร่วมกับ layout_weight
+                เพื่อให้คอลัมน์ซ้ายและขวายืดตามความกว้างหน้าจอ
+            -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/view_bmi_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/section_gap"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/view_bmi_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

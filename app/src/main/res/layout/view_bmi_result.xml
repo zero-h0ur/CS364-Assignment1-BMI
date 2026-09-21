@@ -4,22 +4,37 @@
     android:id="@+id/panel_result"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/result_panel_min_height"
-    android:padding="@dimen/screen_padding"
-    android:background="@color/bmi_result_background"
+    android:accessibilityLiveRegion="polite"
+    android:background="@drawable/bg_bmi_result_card"
+    android:clipToOutline="true"
     android:elevation="@dimen/card_elevation"
     android:gravity="center_horizontal"
+    android:minHeight="@dimen/result_panel_min_height"
     android:orientation="vertical"
-    android:accessibilityLiveRegion="polite">
+    android:padding="@dimen/card_padding">
+
+    <!-- หัวข้อของ Card แสดงผล BMI -->
+    <TextView
+        android:id="@+id/text_result_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:accessibilityHeading="true"
+        android:gravity="center"
+        android:text="@string/result_title"
+        android:textAlignment="center"
+        android:textColor="@color/bmi_text_primary"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
 
     <!--
         แสดงคำแนะนำเริ่มต้นหรือข้อความผิดพลาด
-        ResultBinder จะเปลี่ยนข้อความและสีตามสถานะของหน้าจอ
+        ResultBinder จะเปลี่ยนข้อความและสีให้ตรงกับสถานะ
     -->
     <TextView
         android:id="@+id/text_result_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/section_gap"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/bmi_result_neutral"
@@ -27,8 +42,8 @@
         tools:text="@string/result_empty" />
 
     <!--
-        แสดงค่า BMI ซึ่งผู้ใช้ไม่สามารถแก้ไขได้
-        ข้อความจะถูกจัดรูปแบบให้มีทศนิยม 2 ตำแหน่ง
+        แสดงค่า BMI แบบแก้ไขไม่ได้
+        BmiTextFormatter จัดรูปแบบให้มีทศนิยม 2 ตำแหน่ง
     -->
     <TextView
         android:id="@+id/text_bmi_value"
@@ -45,8 +60,8 @@
         tools:visibility="visible" />
 
     <!--
-        แสดงหมวด BMI และใช้สีช่วยสื่อระดับความเสี่ยง
-        ResultBinder จะกำหนดสีตาม BmiCategory
+        แสดงหมวด BMI พร้อมสีตามระดับความเสี่ยง
+        ResultBinder กำหนดสีตาม BmiCategory
     -->
     <TextView
         android:id="@+id/text_bmi_category"

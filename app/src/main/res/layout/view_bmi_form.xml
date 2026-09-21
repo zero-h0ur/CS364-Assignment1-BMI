@@ -3,43 +3,89 @@
     android:id="@+id/panel_form"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/bg_bmi_card"
+    android:clipToOutline="true"
+    android:elevation="@dimen/card_elevation"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding">
 
+    <!-- หัวข้อของ Card สำหรับข้อมูลน้ำหนักและส่วนสูง -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:accessibilityHeading="true"
+        android:text="@string/form_title"
+        android:textColor="@color/bmi_text_primary"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
+
+    <!-- อธิบายจำนวนหลักสูงสุดที่ผู้ใช้สามารถกรอกได้ -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/compact_gap"
+        android:text="@string/form_helper"
+        android:textColor="@color/bmi_text_secondary"
+        android:textSize="@dimen/text_caption" />
+
+    <!-- ป้ายกำกับช่องน้ำหนัก -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/section_gap"
+        android:labelFor="@id/input_weight"
         android:text="@string/label_weight"
-        android:textSize="@dimen/text_body" />
+        android:textColor="@color/bmi_text_primary"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/input_weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/field_gap"
+        android:hint="@string/hint_weight"
         android:inputType="numberDecimal|numberSigned"
+        android:minHeight="@dimen/control_min_height"
         android:saveEnabled="false"
+        android:textColor="@color/bmi_text_primary"
+        android:textColorHint="@color/bmi_text_secondary"
         android:textSize="@dimen/text_body" />
 
+    <!-- ป้ายกำกับช่องส่วนสูง -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:labelFor="@id/input_height"
         android:text="@string/label_height"
-        android:textSize="@dimen/text_body" />
+        android:textColor="@color/bmi_text_primary"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/input_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/section_gap"
+        android:hint="@string/hint_height"
         android:inputType="numberDecimal|numberSigned"
+        android:minHeight="@dimen/control_min_height"
         android:saveEnabled="false"
+        android:textColor="@color/bmi_text_primary"
+        android:textColorHint="@color/bmi_text_secondary"
         android:textSize="@dimen/text_body" />
 
+    <!-- ปุ่มคำนวณใช้สีหลักของ BMI Compass -->
     <Button
         android:id="@+id/button_calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/bmi_primary"
+        android:minHeight="@dimen/control_min_height"
         android:text="@string/action_calculate"
-        android:textSize="@dimen/text_body" />
+        android:textAllCaps="false"
+        android:textColor="@color/bmi_on_primary"
+        android:textSize="@dimen/text_body"
+        android:textStyle="bold" />
 
 </LinearLayout>

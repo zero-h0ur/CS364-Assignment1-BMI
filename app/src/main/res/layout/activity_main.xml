@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
+    android:background="@color/bmi_canvas"
     android:fillViewport="true">
 
+    <!--
+        หน้าจอแนวตั้งเรียง Header, Form และ Result จากบนลงล่าง
+        ScrollView ป้องกันเนื้อหาถูกตัดเมื่อใช้หน้าจอเล็กหรือ Font ขนาดใหญ่
+    -->
     <LinearLayout
         android:id="@+id/screen_root"
         android:layout_width="match_parent"
@@ -12,7 +17,8 @@
         android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
-        <include layout="@layout/view_bmi_form"
+        <include
+            layout="@layout/view_bmi_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -20,7 +26,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/section_gap" />
 
-        <include layout="@layout/view_bmi_result"
+        <include
+            layout="@layout/view_bmi_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/section_gap" />
+
+        <include
+            layout="@layout/view_bmi_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
