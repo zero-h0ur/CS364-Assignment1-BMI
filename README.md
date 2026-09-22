@@ -258,6 +258,6 @@ Repository นี้ไม่ Commit ไฟล์ต่อไปนี้:
 - Keystore
 - Log และไฟล์ระบบปฏิบัติการ
 
-## Demo Video
-- [Demo Video (Sources)](video)
-- [Youtube URL](https://youtu.be/UYuRbiQOUnw)
+## Demo
+
+ดูวิดีโอการทำงานได้ที่ [BMI Application Demo](docs/demo.md)
